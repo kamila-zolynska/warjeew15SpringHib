@@ -2,6 +2,7 @@ package pl.coderslab.dwarfs;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "dwarfs")
-//@ToString tostring ma opcje exlude, include
+@ToString //tostring ma opcje exlude, include
 public class Dwarf {
 
     @Id

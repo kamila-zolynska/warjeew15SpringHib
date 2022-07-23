@@ -16,4 +16,17 @@ public class DwarfDao {
     public void save(Dwarf dwarf) {
         entityManager.persist(dwarf);
     }
+
+    public Dwarf findById(Long id) {
+        return entityManager.find(Dwarf.class, id);
+    }
+
+    public void update(Dwarf dwarf) {
+        entityManager.merge(dwarf);
+    }
+
+    public void delete(Dwarf dwarf) {
+        entityManager.remove(entityManager.contains(dwarf) ?
+                dwarf : entityManager.merge(dwarf));
+    }
 }
