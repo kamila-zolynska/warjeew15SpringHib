@@ -2,14 +2,11 @@ package pl.coderslab.person;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.author.Author;
 
 @Controller
-@RestController
 @RequiredArgsConstructor
 @RequestMapping("/person")
 public class PersonController {
@@ -31,6 +28,7 @@ public class PersonController {
         return personDao.findById(id).toString();
     }
 
+    //todo: do sprawdzenia
     @GetMapping("/update/{id}")
     public String update(@PathVariable Long id) {
         Person byId = personDao.findById(id);
@@ -44,6 +42,39 @@ public class PersonController {
     public String delete(@PathVariable Long id) {
         Person byId = personDao.findById(id);
         personDao.delete(byId);
-        return "person deleted";
+        return "redirect:/person/list";
     }
+
+    @GetMapping("/list")
+    public String list(Model model) {
+        model.addAttribute("people", personDao.findAll());
+        return "person/list";
+    }
+
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("person", new Person());
+        return "person/add";
+    }
+
+    @PostMapping("/add")
+    public String save(Person person) {
+        personDao.create(person);
+        return "redirect:/person/list";
+    }
+
+//    bez bindowania:
+//    @PostMapping("/add")
+//    public String save(Model model,
+//                       @RequestParam String login,
+//                       @RequestParam String password,
+//                       @RequestParam String email) {
+//        Person person = new Person();
+//        person.setLogin(login);
+//        person.setEmail(email);
+//        person.setPassword(password);
+//
+//        personDao.create(person);
+//        return "redirect:person/list";
+//    }
 }
