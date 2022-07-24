@@ -1,7 +1,6 @@
 package pl.coderslab.person;
 
 import org.springframework.stereotype.Repository;
-import pl.coderslab.person.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

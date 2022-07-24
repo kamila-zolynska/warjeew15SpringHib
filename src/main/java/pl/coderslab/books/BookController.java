@@ -43,7 +43,7 @@ public class BookController {
     @GetMapping("/update/{id}")
     public String update(@PathVariable Long id) {
         Book byId = bookDao.findById(id);
-        byId.setRacing(9);
+        byId.setRating(9);
         bookDao.update(byId);
         return "book updated";
     }
@@ -53,5 +53,19 @@ public class BookController {
         Book byId = bookDao.findById(id);
         bookDao.delete(byId);
         return "book deleted";
+    }
+
+    @GetMapping("/all")
+    public String showAll() {
+        bookDao.findAll()
+                .forEach(b -> System.out.println(b.toString()));
+        return "all";
+    }
+
+    @GetMapping("all/rating/{rating}")
+    public String showAllWithRating(@PathVariable int rating) {
+        bookDao.findAllByRating(rating)
+                .forEach(b -> System.out.println(b.getTitle()));
+        return "all-with-rating";
     }
 }

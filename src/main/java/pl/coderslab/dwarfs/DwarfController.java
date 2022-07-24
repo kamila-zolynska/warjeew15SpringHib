@@ -7,12 +7,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dwarf")
 @RequiredArgsConstructor
 public class DwarfController {
 
     private final DwarfService dwarfService;
+
+    @GetMapping("/all")
+    @ResponseBody
+    public String showAll() {
+        List<Dwarf> dwarfs = dwarfService.findAll();
+        dwarfs.forEach(d -> System.out.println(d.getName()));
+        return "all";
+    }
 
     @RequestMapping("/create")
     @ResponseBody

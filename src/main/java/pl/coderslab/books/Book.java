@@ -1,6 +1,7 @@
 package pl.coderslab.books;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import pl.coderslab.author.Author;
 import pl.coderslab.publisher.Publisher;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString (exclude = {"id"})
+@ToString (exclude = {"id", "publisher", "authors"})
 @Table(name = "books")
 public class Book {
 
@@ -21,16 +22,16 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private int racing;
+    private int rating;
     private String description;
     @ManyToOne
     private Publisher publisher;
     @ManyToMany
     private List<Author> authors;
 
-    public Book(String title, int racing, String description) {
+    public Book(String title, int rating, String description) {
         this.title = title;
-        this.racing = racing;
+        this.rating = rating;
         this.description = description;
     }
 }
