@@ -42,4 +42,11 @@ public class PublisherController {
         publisherDao.delete(byId);
         return "publisher deleted";
     }
+
+    @GetMapping("/all")
+    public String showAll() {
+        publisherDao.findAll()
+                .forEach(p -> System.out.println(p.toString()));
+        return "all";
+    }
 }

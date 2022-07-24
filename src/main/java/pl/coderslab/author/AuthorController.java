@@ -44,4 +44,11 @@ public class AuthorController {
         authorDao.delete(byId);
         return "author deleted";
     }
+
+    @GetMapping("/all")
+    public String showAll() {
+        authorDao.findAll()
+                .forEach(a -> System.out.println(a.toString()));
+        return "all";
+    }
 }
