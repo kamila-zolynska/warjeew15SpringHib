@@ -68,4 +68,27 @@ public class BookController {
                 .forEach(b -> System.out.println(b.getTitle()));
         return "all-with-rating";
     }
+
+    @GetMapping("all-with-author")
+    public String showAllBooksWithAnyAuthor() {
+        bookDao.findAllWithAnyAuthor()
+                .forEach(b -> System.out.println(b));
+        return "all-with-author";
+    }
+
+    @GetMapping("/all-with-publisher")
+    public String showAllBooksWithPublisher(@RequestParam("publisher_id") int publisherId) {
+        Publisher byId = publisherDao.findById((long) publisherId);
+        bookDao.findAllWithPublisher(byId)
+                .forEach(b -> System.out.println(b));
+        return "all-with-publisher";
+    }
+
+    @GetMapping("/all-author")
+    public String showAllBooksWithAuthor(@RequestParam("author_id") int authorId) {
+        Author byId = authorDao.findById((long) authorId);
+        bookDao.findAllWithAuthor(byId)
+                .forEach(b -> System.out.println(b));
+        return "all-with-author";
+    }
 }

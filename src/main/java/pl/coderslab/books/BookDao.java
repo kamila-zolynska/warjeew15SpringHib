@@ -1,6 +1,8 @@
 package pl.coderslab.books;
 
 import org.springframework.stereotype.Repository;
+import pl.coderslab.author.Author;
+import pl.coderslab.publisher.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,6 +40,25 @@ public class BookDao {
     public List<Book> findAllByRating(int rating) {
         return entityManager.createQuery("select b from Book b where b.rating = :score")
                 .setParameter("score", rating)
+                .getResultList();
+    }
+
+    public List<Book> findAllWithAnyAuthor() {
+        return entityManager.createQuery("select distinct b from Book b join b.authors")
+                .getResultList();
+    }
+
+    public List<Book> findAllWithPublisher(Publisher publisher) {
+        return entityManager
+                .createQuery("select b from Book b where b.publisher = :publ")
+                .setParameter("publ", publisher)
+                .getResultList();
+    }
+
+    public List<Book> findAllWithAuthor(Author author) {
+        return entityManager
+                .createQuery("select b from Book b where :author member of b.authors")
+                .setParameter("author", author)
                 .getResultList();
     }
 }
