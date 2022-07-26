@@ -56,10 +56,7 @@
         <input type="submit" value="Save">
       </td>
     </tr>
-
-    </form:form>
-
   </table>
-
+</form:form>
 </body>
 </html>

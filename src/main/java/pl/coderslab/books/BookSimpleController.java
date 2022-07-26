@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/book")
-public class BookController {
+public class BookSimpleController {
 
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
