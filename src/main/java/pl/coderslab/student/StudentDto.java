@@ -3,11 +3,13 @@ package pl.coderslab.student;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class StudentDto {
 
@@ -20,12 +22,4 @@ public class StudentDto {
     private List<String> programmingSkills;
     private List<String> hobbies;
 
-    public StudentDto(String firstName, String lastName, String gender, String country, String notes, boolean mailingList) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.country = country;
-        this.notes = notes;
-        this.mailingList = mailingList;
-    }
 }

@@ -8,25 +8,58 @@
 </head>
 <body>
 <form:form method="post" modelAttribute="studentDto">
-  <form:input path="firstName" />
-  <form:input path="lastName" />
+  <table>
+    <tr>
+      <td><form:label path="firstName">Wpisz swoje imie: </form:label></td>
+      <td><form:input path="firstName" /></td>
+    </tr>
+    <tr>
+      <td><form:label path="lastName">Wpisz swoje nazwisko: </form:label></td>
+      <td><form:input path="lastName" /></td>
+    </tr>
+    <tr>
+      <td><form:label path="gender">Plec:  </form:label></td>
+      <td><form:radiobuttons path="gender" items="${genders}"  /></td>
+    </tr>
+    <tr>
+      <td><form:label path="country">Panstwo:  </form:label></td>
+      <td>
+        <form:select path="country">
+          <form:option value="-" label="--Please Select--"/>
+          <form:options items="${countries}"/>
+        </form:select>
+      </td>
+    </tr>
+    <tr>
+      <td><form:label path="notes">Notatki:  </form:label></td>
+      <td><form:textarea path="notes" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><form:checkbox path="mailingList" label="Dolacz mnie do listy mailingowej"/></td>
+    </tr>
+    <tr>
+      <td><form:label path="programmingSkills"/>Umiejetnosci: </td>
+      <td>
+        <form:select path="programmingSkills">
+          <form:option value="-" label="--Please Select--"/>
+          <form:options items="${programmingSkills}"/>
+        </form:select>
+      </td>
+    </tr>
+    <tr>
+      <td><form:label path="hobbies"/>Hobby: </td>
+      <td><form:checkboxes items="${hobbies}" path="hobbies"/></td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Save">
+      </td>
+    </tr>
 
-<%--  ponizej do poprawy wg zadania 3--%>
+    </form:form>
 
-  <form:input path="gender" />
-  <form:input path="country" />
-  <form:input path="notes" />
+  </table>
 
-  <form:checkbox path="mailingList"/>
-
-  <form:select path="programmingSkills">
-    <form:option value="-" label="--Please Select--"/>
-    <form:options items="${programmingSkills}"/>
-  </form:select>
-
-  <form:checkboxes path="hobbies" items="${hobbies}" itemLabel="hobbies"/>
-</form:form>
-
-<%--do edycji mozna uzyc hidden id--%>
 </body>
 </html>
