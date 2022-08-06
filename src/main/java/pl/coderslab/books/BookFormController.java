@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.coderslab.author.AuthorDao;
 import pl.coderslab.publisher.PublisherDao;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,9 +29,15 @@ public class BookFormController {
     }
 
     @PostMapping("/add")
-    @ResponseBody
-    public String addBook(@ModelAttribute Book book) {
+    public RedirectView addBook(@ModelAttribute Book book) {
         bookDao.create(book);
-        return "OK";
+        return new RedirectView("/book-form/list");
+    }
+
+    @GetMapping("/list")
+    public String showAll(Model model) {
+        List<Book> books = bookDao.findAll();
+        model.addAttribute("books", books);
+        return "book/form/list";
     }
 }
